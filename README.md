@@ -21,6 +21,7 @@ claude plugin update octopus-ai
 | --- | --- | --- |
 | MCP server | Octopus AI | Connection to Octopus AI at `https://app.myoctopus.ai/mcp` |
 | Tool | Ask Octopus | Conversational access to Octopus AI, with your existing permissions, actions and history |
+| Tool | Get logo | The Octopus AI logo (hosted URL + inline SVG) for embedding in decks and reports |
 | Tool | Explore dimension hierarchy | List a dimension's hierarchies, or walk one's node tree (a node's immediate children, or the full subtree) |
 | Tool | Get user/org preferences | Read the stored exclusions, visibility rules, and display settings for you and your organization |
 | Tool | Search insights | Look up org memory — insights and discussion — by business slice, person, topic, channel, or date range (structured filters only, at least one required) |
