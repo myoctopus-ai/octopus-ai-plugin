@@ -23,6 +23,7 @@ claude plugin update octopus-ai
 | Tool | Ask Octopus | Conversational access to Octopus AI, with your existing permissions, actions and history |
 | Tool | Explore dimension hierarchy | List a dimension's hierarchies, or walk one's node tree (a node's immediate children, or the full subtree) |
 | Tool | Get user/org preferences | Read the stored exclusions, visibility rules, and display settings for you and your organization |
+| Tool | Get organization domain | Your organization's website domain, if set — used to style reports with your own logo and colors |
 | Tool | Search insights | Look up org memory — insights and discussion — by business slice, person, topic, channel, or date range (structured filters only, at least one required) |
 | Tool | Get forecast legend | The organization's forecast-version numbers and their display names (version names vary by org) |
 | Tool | Query data | Plan or transaction figures for a business slice — by month or period totals, with names, account type and parent rollup on every row; rollup codes accepted as filters; says what didn't match |
@@ -31,9 +32,9 @@ claude plugin update octopus-ai
 | Tool | Send a question | A tracked ask to an explicit channel/person, or auto-routed by business slice |
 | Tool | Question status | Which sent questions are answered versus still open |
 | Tool | Search questions asked | The questions asked in a date window or about a business slice — who asked, who answered, the reply, and the insight it became |
-| Skill | Version Comparison Report | Compares two or more versions — forecast, budget, working, actuals — with a red/amber/green status per line, and exports a deck or spreadsheet |
-| Skill | Forecast Quality Report | Scores a forecast against the version it replaced: cost risks and saving opportunities, which have a human explanation on record (by whom, how good), which are unexplained gaps, and one page of actions to get the missing reasons |
-| Skill | Variance Investigation | Works a budget-vs-actual gap from headline down to transaction-level cause |
+| Skill | Version Comparison Report | Compares two or more versions — forecast, budget, working, actuals — with a red/amber/green status per line, and exports a branded report page or spreadsheet |
+| Skill | Forecast Quality Report | Scores a forecast against the version it replaced, grouped by whichever dimension you pick (account, entity, department, ...): cost risks and saving opportunities per group, which have a human explanation on record (by whom, how good), the risk-mitigation and savings-lock-in potential still on the table, and one page of actions to get the missing reasons |
+| Skill | Variance Investigation | Works a budget-vs-actual gap from headline down to transaction-level cause; can also produce a shareable one-page branded report on request |
 
 Every tool above is read-only except "Send a question."
 
@@ -52,7 +53,7 @@ Confirm the connection by asking Claude what Octopus AI data is available before
 - "Compare budget to working for Q4"
 - "Build the forecast change deck"
 
-Claude will confirm which versions, the period, the level of detail, the materiality threshold, the RAG method, and whether you want a deck or a spreadsheet, then produce the file.
+Claude will confirm which versions, the period, the level of detail, the materiality threshold, the RAG method, and whether you want a branded report page or a spreadsheet, then produce the file.
 
 **Forecast quality** — trigger with phrases like:
 
@@ -60,7 +61,7 @@ Claude will confirm which versions, the period, the level of detail, the materia
 - "How many of the changes since last roll were actually explained?"
 - "Score this roll's forecast quality"
 
-Claude confirms the forecast under review, period, level and materiality threshold (the baseline is always the version it replaced; revenue is excluded unless asked), then builds a deck: a cover with the FY / YTD / YTG movement color-coded by risk and saving opportunity, the score, every material movement with its recorded explanation, who gave it and how well it was explained, the records that only look like explanations, and one closing page of actions — each tied to what a fuller reason would let the org do.
+Claude confirms the forecast under review, period, which dimension and level to group by (account, entity, department, ...), and materiality threshold (the baseline is always the version it replaced; revenue is excluded unless asked), then builds a branded report Artifact — styled with your organization's own logo and color when its website is reachable: a cover with the FY / Current Quarter / Current Month / YTG movement color-coded by risk and saving opportunity, a variance summary showing who explained how much and the risk-mitigation or savings-lock-in potential still unclaimed, one section per group with its own risks and opportunities and their recorded explanations, the records that only look like explanations, and one closing page of actions — each tied to what a fuller reason would let the org do.
 
 **Variance investigation** — trigger with phrases like:
 
@@ -68,7 +69,7 @@ Claude confirms the forecast under review, period, level and materiality thresho
 - "Investigate the variance in this cost center"
 - "Drill into what's driving the overspend"
 
-Claude will confirm the comparison basis and materiality, then work down through validity checks, hierarchy decomposition, price/volume/timing tests, and — only if needed — transaction review. It reports the cause, the evidence behind it, and any amount left unexplained.
+Claude will confirm the comparison basis and materiality, then work down through validity checks, hierarchy decomposition, price/volume/timing tests, and — only if needed — transaction review. It reports the cause, the evidence behind it, and any amount left unexplained, in chat by default — it can also turn that finding into a one-page branded report if you ask for one to share.
 
 **Direct tools** — Claude can also use the tools above on their own, without a skill, whenever a request is a plain lookup rather than a report: "what departments roll up under IT?", "what are my saved preferences?", "has anyone explained the marketing overspend?", "pull Q3 actuals by vendor", "who's in the #fpa-it-spend channel?", "ask finance ops about the late accrual", "did anyone answer that headcount question?".
 
