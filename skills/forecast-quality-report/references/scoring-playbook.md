@@ -12,6 +12,22 @@ Evidence standard for marking a material movement "explained", how to handle edg
 
 Take the most specific and most recent record when several exist. Conflicting records: report both, mark the line explained-but-disputed, and make the action "reconcile".
 
+## What the record explains — the decisive test
+
+A record must explain the **forecast change** between the two versions. Two other kinds of record look the same in prose and are not:
+
+| Record explains… | Looks like | Verdict |
+| --- | --- | --- |
+| **A forecast change** — "we cut the Aug–Dec Oracle line because the licence was prepaid in July" | the movement | **Explained** |
+| **An actuals variance** — "August actuals overshot the forecast because the Poland event landed early" (`kind: variance_alert`, or a reply to a variance question) | the same account, the same months | **Not this movement.** It explains why actuals differed from a plan, not why the plan moved between versions — unless the record ALSO says the next roll was changed because of it |
+| **A standing rule** — "welfare accounts are managed as one basket", "BT60012 carries no forecast by design" (`kind: user_taught`, `category: business_rule` / `plan_behavior`) | context | **Not an explanation.** A rule can make a movement *expected*; it does not say what changed this roll. It CAN disqualify a movement (a $0-by-policy line that now carries a figure is a finding) |
+
+Use the structured fields to decide before reading prose: `kind`, `category`, `forecast_number` (a record filed under the baseline version explains that version, not the change to the next one), `dimensions`. This test decided most of the "looks like an explanation but isn't" cards in real runs — apply it to every candidate.
+
+## Closed months
+
+Some orgs reload actuals into closed months on every roll. There, a YTD delta between two versions is the reload, not a decision — nothing a human "explained" — so it is shown on the cover and left out of the score. Check org memory and preferences for this behaviour before scoring YTD (SKILL.md, "Check how closed months behave").
+
 ## Matching a record to a movement
 
 A record must cover the SAME dimensions (or an ancestor of them) and a period overlapping the two versions. A record for a different cost center, or a period outside the window, does not explain this movement however similar the topic. Say specifically why it falls short ("covers Herzliya; the movement is Property Rent Taxes") and keep the line in the gaps.

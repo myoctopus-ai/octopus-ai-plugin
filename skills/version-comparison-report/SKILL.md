@@ -31,7 +31,7 @@ Do not guess the version set. A comparison against the wrong baseline is worse t
 
 ## Pull the data
 
-Use the Octopus AI connector for all figures. List the connector's available tools first and pick the ones that expose plan figures (by version), actuals, and hierarchy/dimension metadata — do not assume tool names, and do not fill gaps from memory or general knowledge. Actuals have no "version" of their own — they are one comparison point, not a forecast/budget/working variant.
+Use the Octopus AI connector for all figures. List its tools first, then: resolve version names with the forecast legend, read org preferences (standing exclusions, applied via `exclude_dimensions`), and pull each version pair with the **version-comparison tool** — base, current, `months` = the period, `level` = the reporting level — which returns base / current / delta / delta % per node already rolled up. One call per adjacent pair; never both versions leaf-by-month. Do not fill gaps from memory or general knowledge. Actuals have no "version" of their own — pass `"actuals"` as one side; they are one comparison point, not a forecast/budget/working variant. Write the returned rows to a local file so a threshold or format change is a recompute, not a refetch.
 
 Retrieve, at the agreed level, for every version in scope:
 

@@ -1,6 +1,6 @@
 {
   "name": "octopus-ai",
-  "version": "0.9.2",
+  "version": "0.10.0",
   "description": "Connects to Octopus AI and adds FP&A workflows: multi-version comparison reporting, forecast quality scoring, and root-cause variance investigation. Also exposes direct read-only tools for dimensions/hierarchies, preferences, org-memory search, plan/transaction data, and messaging.",
   "author": {
     "name": "Octopus AI"

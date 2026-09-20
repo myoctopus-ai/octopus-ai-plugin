@@ -21,12 +21,12 @@ claude plugin update octopus-ai
 | --- | --- | --- |
 | MCP server | Octopus AI | Connection to Octopus AI at `https://app.myoctopus.ai/mcp` |
 | Tool | Ask Octopus | Conversational access to Octopus AI, with your existing permissions, actions and history |
-| Tool | Get logo | The Octopus AI logo (hosted URL + inline SVG) for embedding in decks and reports |
 | Tool | Explore dimension hierarchy | List a dimension's hierarchies, or walk one's node tree (a node's immediate children, or the full subtree) |
 | Tool | Get user/org preferences | Read the stored exclusions, visibility rules, and display settings for you and your organization |
 | Tool | Search insights | Look up org memory — insights and discussion — by business slice, person, topic, channel, or date range (structured filters only, at least one required) |
 | Tool | Get forecast legend | The organization's forecast-version numbers and their display names (version names vary by org) |
-| Tool | Query data | Plan or transaction figures for a business slice, grouped or (transactions) row-level — takes forecast version numbers, not names |
+| Tool | Query data | Plan or transaction figures for a business slice — by month or period totals, with names, account type and parent rollup on every row; rollup codes accepted as filters; says what didn't match |
+| Tool | Compare versions | Two versions (or a version vs actuals) as one row per hierarchy node — base, current, delta, delta % — rolled up server-side at the level you ask for |
 | Tool | List channels and users | Who and where a question or message could go |
 | Tool | Send a question | A tracked ask to an explicit channel/person, or auto-routed by business slice |
 | Tool | Question status | Which sent questions are answered versus still open |

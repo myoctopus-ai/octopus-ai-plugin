@@ -2,6 +2,12 @@
 
 Slide-by-slide layout. Direction words everywhere: **Risk** (cost up, red) and **Opportunity** (cost down, green) — never a bare signed number as the only cue. Keep every slide readable at a glance; split a long table across slides rather than shrink it.
 
+## Build from the template and the saved file
+
+`references/deck-template.js` is a pptxgenjs generator with every slide below already laid out (grid, type sizes, colors, table geometry that fits). Copy it next to the saved comparison file, fill the `data` object at the top from `forecast-quality-<version>.json` and the scoring you did, run it, and check the render once. Do not write a new generator per run — the two most common defects (tables overflowing the slide, text colliding with the footer) are already solved in the template.
+
+Data file shape the template expects: see the `data` object's comments in the template. Re-cutting at another threshold means regenerating that object from the same file and re-running — no connector call.
+
 ## Slide 1 — Cover: how the forecast moved
 
 The version under review vs its baseline, FY / YTD / YTG, and the score — one screen a CFO can read without opening the rest.
