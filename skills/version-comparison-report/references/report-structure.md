@@ -30,9 +30,9 @@ Compute per material line, and for the grand total:
 
 A line with no prior value (new) or no current value (dropped) has no percentage to band — flag it in the new/dropped section instead of forcing a RAG color.
 
-## Bridge slide
+## Bridge section
 
-Waterfall from the first version's total to the last:
+Waterfall from the first version's total to the last (see the `dataviz` skill for how to render it — colors, accessibility, direction cues):
 
 - Start bar: first version's total
 - One bar per material driver group, in descending absolute size
@@ -41,7 +41,7 @@ Waterfall from the first version's total to the last:
 
 The bars must sum exactly to the difference between start and end. If they do not, lines are missing from the pull.
 
-## Driver slide (one per material group)
+## Driver section (one per material group)
 
 - Line or group name and its position in the hierarchy
 - Value under each version in scope, delta, delta %

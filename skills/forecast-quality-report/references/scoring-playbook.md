@@ -26,7 +26,7 @@ Use the structured fields to decide before reading prose: `kind`, `category`, `f
 
 ## Closed months
 
-Some orgs reload actuals into closed months on every roll. There, a YTD delta between two versions is the reload, not a decision — nothing a human "explained" — so it is shown on the cover and left out of the score. Check org memory and preferences for this behaviour before scoring YTD (SKILL.md, "Check how closed months behave").
+Some orgs reload actuals into closed months on every roll. There, a delta between two versions on a line that includes the closed month is the reload, not a decision — nothing a human "explained." Since the closed month sits inside the report's **Current Month** line (always) and **Current Quarter** line (whenever the quarter contains it), those cover lines are shown but flagged as reload-affected rather than scored as a clean forecast read. YTG is never affected — it starts the month after the closed month. Check org memory and preferences for this behaviour before finalizing the cover (SKILL.md, "Check how closed months behave").
 
 ## Matching a record to a movement
 

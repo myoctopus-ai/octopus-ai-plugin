@@ -5,9 +5,10 @@ description: >
   "investigate this variance", "what's driving the overspend", "drill into
   this account", "explain the gap vs plan", "root cause this number", or
   points at a budget-vs-actual gap and wants it explained. Walks from the
-  headline variance down to transaction-level cause.
+  headline variance down to transaction-level cause — can also produce a
+  shareable one-page branded report on request.
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # Variance Investigation
@@ -83,3 +84,7 @@ Always state the residual. A conclusion that accounts for 60% of a gap is useful
 Where the data does not establish a business reason, say so and name who or what would have it — the cost center owner, the vendor contract, the journal preparer. Do not infer intent from the numbers.
 
 Offer to post the finding to ~~chat rather than doing so unprompted.
+
+## Sharing as a report
+
+This skill is built to be fast — most questions resolve at tier 1 or 2, and a chat answer is the right output for that. Don't fetch branding or build anything by default. Only offer: *"Want this as a one-page branded report to share?"* If the user says yes, fetch org branding (`references/org-branding.md`, same recipe as the other reporting skills) and load `artifact-design` to build a short Artifact covering the same six points above (headline, cause, evidence, classification, recurring/one-time, residual) as a page rather than a chat reply. Skip the branding fetch and the Artifact entirely unless the user has actually asked to formalize the finding.

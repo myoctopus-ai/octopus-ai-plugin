@@ -6,10 +6,10 @@ description: >
   "roll vs roll", "compare budget to forecast", "compare working to
   actuals", "build the forecast change deck", "forecast movement report",
   or wants a recurring package comparing two or more versions of a
-  number — forecast, budget, working, or actuals. Produces an exported
-  deck or spreadsheet, not just a chat answer.
+  number — forecast, budget, working, or actuals. Produces an exported,
+  branded report page or spreadsheet, not just a chat answer.
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
 ---
 
 # Version Comparison Report
@@ -25,7 +25,7 @@ Before pulling data, confirm what the user has not already said:
 3. **Level of detail** — entity, cost center, account, or a specific hierarchy branch.
 4. **Materiality threshold** — the amount above which a movement is worth calling out. If the user hasn't set one, propose one based on the size of the total and confirm it.
 5. **RAG method** (see "RAG status" below) — default to materiality-tier based unless the user asks for fixed percentage bands or gives their own thresholds.
-6. **Output format** — slide deck or spreadsheet.
+6. **Output format** — a branded report page or a spreadsheet.
 
 Do not guess the version set. A comparison against the wrong baseline is worse than no report.
 
@@ -74,18 +74,22 @@ Keep each callout to one or two sentences: line, direction, magnitude, RAG statu
 
 Verify every figure in the narrative against the retrieved data before export. Numbers that appear in prose but not in the underlying table are the main failure mode of this report.
 
+## Fetch org branding
+
+If the output format is the report page (not the spreadsheet), fetch org branding before building it — see `references/org-branding.md` for the recipe and its fallback. This is purely cosmetic and never blocks the report; skip it entirely for a spreadsheet, since it has nowhere to show a logo or accent color.
+
 ## Export
 
-Build the file with the matching document skill — the pptx skill for a deck, the xlsx skill for a spreadsheet.
+For a spreadsheet, build the file with the xlsx skill — unchanged. For the report page: load the `artifact-design` skill before writing it, and build a branded HTML Artifact (styled per the fetch above, with a graceful neutral fallback) instead of a pptx deck. For the bridge/waterfall chart specifically, the `dataviz` skill governs the rendering (colors, accessibility) — don't reinvent chart styling from scratch.
 
-Deck structure:
+Report page structure:
 
-1. Headline: total movement, every version name in scope, period, RAG method used
-2. Bridge from the first version's total to the last, largest movements first
-3. One slide per material driver group (each showing its RAG status)
-4. Phasing-only changes
-5. New and dropped lines
-6. Appendix: full line-level table with a RAG column
+1. Headline section: total movement, every version name in scope, period, RAG method used
+2. Bridge section from the first version's total to the last, largest movements first
+3. One section per material driver group (each showing its RAG status)
+4. Phasing-only changes section
+5. New and dropped lines section
+6. Appendix section: full line-level table with a RAG column
 
 Spreadsheet structure: one tab with the full comparison (value per version, delta, delta %, RAG, flag), one tab with the material movements and their narrative.
 
