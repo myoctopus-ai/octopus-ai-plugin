@@ -39,7 +39,7 @@ Use the Octopus AI connector. List its tools once, then follow this order; it is
 1. **Forecast legend** — resolve the version under review to its number and find the baseline (below).
 2. **Org preferences** — read them before any figures. They carry the standing exclusions (entities, hierarchy nodes, accounts the org never scores), display conventions, and known data behaviours. Apply every exclusion via `exclude_dimensions`; name them on the cover.
 3. **One comparison call** — the version-comparison tool with base = baseline, current = version under review, `months` = the report period, `dimension` = the scope check's chosen dimension, `level` = the scope check's chosen level, revenue and org exclusions applied. It returns one row per node with base, current, delta and delta %, already rolled up. This is the scored set. Do not pull both versions leaf-by-month and roll them up yourself — that is thousands of rows for nothing.
-4. **Actuals by month** — one `query_data` call, transactions, `aggregate: "period"` is NOT what you want here; use `group_by: []` with months to find the **closed month**: the latest month with actuals. Do this before the next step — the roll numbers below depend on it.
+4. **Actuals by month** — one `query_transactions` call, `aggregate: "period"` is NOT what you want here; use `group_by: []` with months to find the **closed month**: the latest month with actuals. Do this before the next step — the roll numbers below depend on it.
 5. **Cover totals, totals only** — same versions, `level` 0 (whole-org total, regardless of the report's grouping dimension):
    - **FY** — months = Jan–Dec
    - **Current Quarter** — the calendar quarter containing the closed month (this skill treats the fiscal year as Jan–Dec throughout; quarter = the 3-month block containing the closed month)
@@ -88,7 +88,7 @@ From the file: every node at or above the threshold. Classify each:
 
 - **Risk** — cost went **up** (unfavorable). Red.
 - **Saving opportunity** — cost went **down** (favorable). Green.
-- **Timing vs level** — if a node's months are in the file (or one extra `query_data` per material node, `aggregate: "month"`), a move that nets to ~zero across the period is timing. Score it, but label it, so nobody reads it as a real cut or overrun.
+- **Timing vs level** — if a node's months are in the file (or one extra `query_plans`/`query_transactions` per material node, `aggregate: "month"`), a move that nets to ~zero across the period is timing. Score it, but label it, so nobody reads it as a real cut or overrun.
 
 Every material movement also carries the group it belongs to — the value of the report's chosen dimension for that node (e.g. its department, or its entity). Never present a movement as just a signed number. The reader should see Risk or Opportunity every time.
 
