@@ -68,7 +68,7 @@ State which method was used in the report itself (a line under the headline, and
 
 ## Write the narrative
 
-For each material movement, state what changed and by how much. Where the connector exposes an explanation, commentary, or driver for that line (search org memory for it — a recorded insight or answered question about that line/period), use it. Where none exists, say the driver is not recorded — never infer a business reason from the numbers alone.
+For each material movement, state what changed and by how much. Where the connector exposes an explanation for that line, use it: `search_explanations` with the two versions compared returns the explanations recorded for that pair, each with the amount it explains and the leaf ids it is placed on; `search_insights` adds commentary that is not tied to the pair. Where none exists, say the driver is not recorded — never infer a business reason from the numbers alone.
 
 Keep each callout to one or two sentences: line, direction, magnitude, RAG status, driver or "driver not recorded."
 

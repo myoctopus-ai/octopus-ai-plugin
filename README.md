@@ -31,7 +31,8 @@ claude plugin update octopus-ai
 | Tool | List channels and users | Who and where a question or message could go |
 | Tool | Send a question | A tracked ask to an explicit channel/person, or auto-routed by business slice |
 | Tool | Question status | Which sent questions are answered versus still open |
-| Tool | Search questions asked | The questions asked in a date window or about a business slice — who asked, who answered, the reply, and the insight it became |
+| Tool | Search explanations | The explanations recorded for a pair of versions — who explained what, the amount each explains, and the lines it covers; the source for "how much is explained" |
+| Tool | Search questions asked | The questions asked in a date window or about a business slice — who asked, who answered, the reply, and the insights it became |
 | Skill | Version Comparison Report | Compares two or more versions — forecast, budget, working, actuals — with a red/amber/green status per line, and exports a branded report page or spreadsheet |
 | Skill | Forecast Quality Report | Scores a forecast against the version it replaced, grouped by whichever dimension you pick (account, entity, department, ...): cost risks and saving opportunities per group, which have a human explanation on record (by whom, how good), the risk-mitigation and savings-lock-in potential still on the table, and one page of actions to get the missing reasons |
 | Skill | Variance Investigation | Works a budget-vs-actual gap from headline down to transaction-level cause; can also produce a shareable one-page branded report on request |

@@ -94,10 +94,11 @@ Every material movement also carries the group it belongs to — the value of th
 
 ## Gather the human explanations
 
-For each material node, look for a recorded human reason. Two tools, both filtered by the node's dimensions (pass the rollup code — the tools expand it) and the window between the two versions:
+For each material node, look for a recorded human reason. Explanations live on insights, whether someone was asked for them or not:
 
-- **Org memory** (`search_insights`) — insights and discussion. Use the structured fields on each result: `dimensions` (does it bind to this node's slice?), `year` / `forecast_number` (is it about this version?), `kind` (`variance_alert` is about an actuals variance; `user_taught` is a rule or explanation a person gave), `author`, `created_at`. Decide coverage from those fields, not from reading the prose first.
-- **Questions asked** (`search_tasks`) — who asked, who answered, the reply, and any insight the answer was captured into. An `answered` or `resolved` question **is** a human explanation; an `asked` one is a gap that already has a question in flight (say so — don't ask it twice).
+- **Explanations** (`search_explanations`) — the source. Call it once per report with `versions` = the two versions compared (the numbers from `get_forecast_legend`; either order) and `year`; add `dimensions` (the rollup code — it expands) to narrow to a group. Each explanation carries `amount` (USD it explains), `counted`, `basis`, `months`, `by`, and the leaf ids it is placed on (`dimensions`). Match an explanation to a node by those leaf ids and months, and credit the node at most its own |delta| and the explanation at most its `amount`. One with `counted: false` ("amount pending") names a driver with no amount: show it, but it adds nothing to the magnitude score.
+- **Org memory** (`search_insights`) — insights and discussion, for records that are not a version-pair explanation: standing rules, actuals variances, context. Use the structured fields on each result: `dimensions` (does it bind to this node's slice?), `year` / `forecast_number` (is it about this version?), `kind` (`variance_alert` is about an actuals variance; `user_taught` is a rule or explanation a person gave), `explains` (present when the insight explains a version pair, with its amount), `author`, `created_at`. Decide coverage from those fields, not from reading the prose first.
+- **Questions asked** (`search_tasks`) — the record of questions: use it to see that a gap already has a question in flight (`asked` — say so, don't ask it twice). Do not score from it; its answers are the explanations above.
 
 A movement is **explained** only when a record names its driver and covers its dimensions and period **and explains a forecast change** — not an actuals variance, not a standing rule (see the evidence table in `references/scoring-playbook.md`; this distinction decided most "looks like an explanation" cases). Adjacent, partial or stale records do not count — list them separately as "looks like an explanation but isn't", and say specifically why. Never explain a movement from the shape of the numbers.
 
@@ -110,7 +111,7 @@ Every explanation gets a quality grade against four marks — cause named, quant
 Compute all of the following **org-wide**, for the top-of-report variance summary, and again **per group** (per dimension value), for that group's own section:
 
 - **Count score** — explained material movements ÷ total material movements.
-- **Magnitude score** — |delta| of explained movements ÷ |delta| of all material movements.
+- **Magnitude score** — the explained dollars ÷ |delta| of all material movements, where each movement is credited the counted `amount`s placed on it, capped at its own |delta|.
 - **Explained risk vs explained opportunity** — the two magnitudes split by direction.
 - **Explained by whom** — a rollup of who explained how much: for each named person, the count and $ amount of material movements they explained, split by risk vs. opportunity, and a note of how (insight, answered question). Sort by amount descending. Normalize a person's name consistently before aggregating (e.g. don't let "Dana K." and "Dana Kaplan" split into two rows for the same person) — today's per-line `by` field already names the person; this just sums it.
 

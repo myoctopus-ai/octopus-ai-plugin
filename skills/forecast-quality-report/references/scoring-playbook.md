@@ -6,9 +6,9 @@ Evidence standard for marking a material movement "explained", how to handle edg
 
 | Source | Counts as explained when | Does NOT count |
 | --- | --- | --- |
-| Insight | An insight on file names a cause for this slice, covering the window between the two versions | An insight about the same account/department but a different period, or a different slice |
-| Answered question | A tracked question about this slice has a human reply that names a driver (state `answered` or `resolved`) | A question that is `asked` with no reply yet — that is a gap with an ask already in flight; a reply that names no driver ("checking on it") |
-| Task driver | A driver hypothesis on a task was confirmed by a human, not merely proposed | An unconfirmed/unjudged driver guess — treat as no record |
+| Explanation (`search_explanations`) | It was recorded for this version pair, is placed on this slice (its `dimensions` leaf ids), and its `months` overlap the window. It explains up to its `amount` | `counted: false` ("amount pending") — it names a driver with no amount: show it, score no dollars; an explanation of a different pair |
+| Insight (`search_insights`) | An insight on file names a cause for this slice, covering the window between the two versions — prefer its `explains` block (pair and amount) when present | An insight about the same account/department but a different period, or a different slice |
+| Question in flight (`search_tasks`) | Never on its own — an answered question's reply is recorded as an explanation above | A question that is `asked` with no reply yet — that is a gap with an ask already in flight |
 
 Take the most specific and most recent record when several exist. Conflicting records: report both, mark the line explained-but-disputed, and make the action "reconcile".
 
@@ -34,7 +34,7 @@ A record must cover the SAME dimensions (or an ancestor of them) and a period ov
 
 ## Partial coverage
 
-When a record explains part of a movement, the remainder is still a gap: report the explained portion, the residual amount, and score the line by the majority. State the residual — never round a partial to "resolved".
+When a record explains part of a movement, the remainder is still a gap: report the explained portion, the residual amount, and score the line by the majority. An explanation's `amount` is the explained portion — several explanations on one line add up, capped at the line's |delta|. State the residual — never round a partial to "resolved".
 
 ## Direction
 
